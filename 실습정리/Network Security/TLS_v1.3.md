@@ -12,7 +12,8 @@ s_client : SSL/TLS 서버와의 연결을 시도해서 인증서, 프로토콜 �
 <img src="https://github.com/seonhara/Cyber-Security/blob/main/images/tls1.3.png" alt="Image 1" height="200" />
 </p>
 
-✅ TLS 1.3이 가장 안전한 이유
+✅ **TLS 1.3이 TLS 버전 중 가장 안전한 이유**
+
 1. ❌ 낡고 취약한 암호 알고리즘 제거
 RC4, MD5, SHA-1, EXPORT cipher, CBC 모드 등 과거 공격 사례가 있었던 알고리즘들을 완전히 제거
 
