@@ -9,7 +9,26 @@ Network Basic input output system : LAN 근거리 통신망 사이에 있는 호
 
 - 네트워크 제어판을 이용하여 Net BIOS TCP/IP 바인딩 제거
 1. 실행(Windows +R) > ncapa.cpl 입력(네트워크 연결)
+<p align="center">
+<img src="https://github.com/seonhara/Cyber-Security/blob/main/images/net_bios1.png" alt="Image 1" height="200" />
+</p>
+   
 2. 네트워크 인터페이스 속성 선택
+<p align="center">
+<img src="https://github.com/seonhara/Cyber-Security/blob/main/images/net_bios2.png" alt="Image 1" height="200" />
+</p>
+
 3. TCP/IPv4 속성 선택 
+<p align="center">
+<img src="https://github.com/seonhara/Cyber-Security/blob/main/images/net_bios3.png" alt="Image 1" height="200" />
+</p>
+
 4. 고급 선택 
+<p align="center">
+<img src="https://github.com/seonhara/Cyber-Security/blob/main/images/net_bios4.png" alt="Image 1" height="200" />
+</p>
+
 5. WINS 탭에서 ‘NetBIOS over TCP/IP 사용 안함’ 선택
+<p align="center">
+<img src="https://github.com/seonhara/Cyber-Security/blob/main/images/net_bios5.png" alt="Image 1" height="200" />
+</p>
