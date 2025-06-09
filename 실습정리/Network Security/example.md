@@ -10,9 +10,9 @@ AWS EC2에 Vite 앱을 올렸다면, Nginx + Certbot 사용해 TLS 적용 가능
 
 ### TLS 적용 전후 비교
 <p align="center">
-  <img src="https://github.com/seonhara/Cyber-Security/blob/main/images/tls_before.png" alt="Image 1" height="200" />
+  <img src="https://github.com/seonhara/Cyber-Security/blob/main/images/tls_before.png" alt="Image 1" height="200" width ="250" />
     &nbsp;&nbsp;&nbsp;&nbsp; <!-- 사진 사이 여백 -->
-  <img src="https://github.com/seonhara/Cyber-Security/blob/main/images/tls_complete.png" alt="Image 2" height="200" />
+  <img src="https://github.com/seonhara/Cyber-Security/blob/main/images/tls_complete.png" alt="Image 2" height="200" width ="250" />
 </p>
 
 ---
