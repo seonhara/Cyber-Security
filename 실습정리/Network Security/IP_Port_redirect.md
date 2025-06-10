@@ -1,3 +1,18 @@
+# IP:Port -> https://URI 로 리디렉션하기 
+# 보안기사 끝나고 계속 작업하기...
+/etc/nginx/sites-available/default
+
+```
+server {
+    listen 5173;
+    server_name _;
+
+    location / {
+        return 301 https://foodie-guide.duckdns.org$request_uri;
+    }
+}
+```
+---
 # HTTPS 리디렉션이 방어에 효과적인 주요 사이버 공격
 
 | 공격 유형                                | 설명                                        | HTTPS 리디렉션 방어 효과                                                         |
