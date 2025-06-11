@@ -1,5 +1,5 @@
 # IP:Port -> https://URI 로 리디렉션하기 
-# 보안기사 끝나고 계속 작업하기...
+
 /etc/nginx/sites-available/default
 
 ```
