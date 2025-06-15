@@ -1,4 +1,4 @@
-# IP:Port -> https://URI 로 리디렉션하기 < IP로 직접 접속은 차단하고, 오직 도메인을 통해서만 사이트를 제공하는 방식
+# IP 접속 차단 및 도메인을 통해서 사이트 제공
 ### 💡 보안상 장점
 
 ✅ 서버 노출 최소화
@@ -9,20 +9,26 @@
 
 ✅ SSL 인증서 관련 경고/오류 노출 방지
 
-/etc/nginx/sites-available/default
+/etc/nginx/sites-available/default 예시
 
 ```
+# IP 접속 및 잘못된 Host 헤더 접근 차단 (80 포트)
 server {
-    listen 5173;
+    listen 80 default_server;
+    listen [::]:80 default_server;
     server_name _;
 
-    location / {
-        return 301 https://foodie-guide.duckdns.org$request_uri;
-    }
+    return 444;  # 응답 없이 연결 끊기
 }
 ```
 
+| <p align="center"><img src="https://github.com/seonhara/Cyber-Security/blob/main/images/ip_deny1.png" height="200"></p> | <p align="center"><img src="https://github.com/seonhara/Cyber-Security/blob/main/images/ip_deny2.png" height="200"></p> |
+|:--:|:--:|
+| http://IP주소 접속 차단 화면 | https://IP주소 접속 차단 화면 |
+---
+
 ### 🚀 IP redirect 접속 vs  IP 접속 차단 비교 요약
+* 서비스 측면
 
 | 항목        | 차단          | 리다이렉션                 |
 | --------- | ----------- | --------------------- |
@@ -33,23 +39,15 @@ server {
 | SEO       | 무관          | 도메인 이동 유도             |
 | SSL 경고 위험 | 없음          | IP→HTTPS 리디렉션 시 경고 가능 |
 
----
-# HTTPS 리디렉션이 방어에 효과적인 주요 사이버 공격
-
-| 공격 유형                                | 설명                                        | HTTPS 리디렉션 방어 효과                                                         |
-| ------------------------------------ | ----------------------------------------- | ------------------------------------------------------------------------ |
-| **세션 하이재킹 (Session Hijacking)**      | 공격자가 쿠키나 세션 토큰을 탈취해 사용자의 인증된 세션을 가로채는 공격  | HTTPS로 세션 쿠키를 암호화 전송하고, `Secure` 플래그로 HTTPS에서만 쿠키 전송되도록 제한해 **쿠키 탈취 방지** |
-| **중간자 공격 (MITM: Man-in-the-Middle)** | 클라이언트와 서버 사이에 공격자가 개입해 데이터를 도청하거나 변조하는 공격 | HTTPS는 전송 중 데이터가 암호화되어 있어 **패킷 도청 및 조작 불가**                              |
-| **DNS 스푸핑**                          | 가짜 DNS 응답을 보내 사용자 트래픽을 공격자 서버로 유도         | HTTPS는 도메인 인증서를 검사하므로 **잘못된 서버로의 연결 차단**                                 |
-| **피싱 공격 유도**                         | 사용자를 **`http://IP`나 유사한 도메인으로 유도 후 악성 행위**    | 사용자가 항상 `https://도메인`으로 접속되게 하면 **피싱 유도 방지**                             |
-| **쿠키 탈취 (Session Cookie Theft)**     | 비암호화된 HTTP로 전송되는 쿠키를 스니핑해서 탈취             | HTTPS + `Secure` 속성으로 쿠키를 암호화된 채널에서만 전송하게 하여 **쿠키 탈취 불가**                |
-| **사이트 변조 (Content Injection)**       | 공공 와이파이 등에서 HTML에 악성 스크립트를 삽입하는 공격        | HTTPS는 콘텐츠 무결성을 보장하여 **스크립트 삽입 불가**                                      |
-
+* 보안 측면
+  
+| 위협           | IP 접속 허용 시            | IP 접속 차단 + 도메인 제공 시 |
+| ------------ | --------------------- | ------------------- |
+| 서비스 정보 노출    | IP 스캔, 배너 노출          | 존재 자체 숨김            |
+| SSL mismatch | 인증서 경고, 정보 노출         | SSL mismatch 시도 불가  |
+| 세션 하이재킹      | SameSite, HSTS 미적용 위험 | 도메인 정책 강제 적용        |
+| DNS 보안 무효화   | DNS 보안 우회 가능          | DNS 보안 정책 적용        |
+| DoS 대응       | IP 트래픽 공격에 취약         | Nginx 레벨 차단         |
 
 ---
-## 정리
-🔐 요약: HTTPS 리디렉션의 보안 효과
-* 데이터 전송 암호화 → MITM, 세션 하이재킹 방지
-* 세션 쿠키 보호 → 세션 탈취 방지
-* 브라우저 인증서 검사 → DNS 스푸핑 방지
-* 피싱 및 콘텐츠 변조 방지 → 사용자 신뢰 확보
+
