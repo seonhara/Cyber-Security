@@ -46,7 +46,6 @@ ServerSignature Off
 error_page 404 /custom_404.html;
 location = /custom_404.html {
     root /usr/share/nginx/html;
-    internal;
 }
 ```
 
